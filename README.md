@@ -1,10 +1,3 @@
-Here’s a **README.md** file template for your Flask application. This document assumes your project is hosted on GitHub and will guide users on how to use your application.
-
----
-
-### README.md
-
-```markdown
 # Flask JWT API Application
 
 This is a Flask-based API application that generates and validates JSON Web Tokens (JWTs). The application includes features like IP-based filtering, CORS (Cross-Origin Resource Sharing) configuration, and configurable JWT expiration. The application is containerized using Docker for easy deployment.
