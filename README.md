@@ -23,49 +23,27 @@ This is a Flask-based API application that generates and validates JSON Web Toke
 
 ---
 
-## Setup Instructions
+## Deployment
 
-### 1. Clone the Repository
+Docker Compose Configuration
+docker-compose.yml
+Below is the docker-compose.yml file used to deploy this application:
 
-```bash
-git clone https://github.com/<your_username>/<repository_name>.git
-cd <repository_name>
-```
 
-### 2. Install Dependencies
+```yaml
+version: '3.9'
 
-Create a virtual environment and activate it:
-
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-Install the required Python packages:
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Configure Environment Variables
-
-Create a `.env` file in the root directory of the project and configure the following variables:
-
-```env
-CORS_ORIGINS=http://example.com,http://anotherwebsite.com
-SECRET_KEY=your_very_secure_secret_key
-JWT_EXPIRATION_MINUTES=30
-```
-
-### 4. Run the Flask Application
-
-Run the application locally:
-
-```bash
-flask run
-```
-
-The application will be accessible at `http://127.0.0.1:5000`.
+services:
+  flask-app:
+    image: adclab/flashjwt
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    environment:
+      FLASK_RUN_HOST: 0.0.0.0
+      FLASK_RUN_PORT: 5000
+'''
 
 ---
 
@@ -165,10 +143,6 @@ The application will be accessible at `http://localhost:5000`.
 
 ---
 
-## Testing
-
-Use tools like `curl`, [Postman](https://www.postman.com/), or a browser extension like [Rest Client](https://restclient.net/) to test the API endpoints.
-
 ### Example cURL Commands
 
 #### Generate JWT
@@ -183,12 +157,3 @@ curl -X POST http://127.0.0.1:5000/validate-key \
      -d '{"api_key": "<your_jwt_here>"}'
 ```
 
----
-
-## Deployment
-
-To deploy this application to a production server, you can use the following approaches:
-1. **Docker**: Use the Dockerfile provided in this repository.
-2. **Gunicorn + Nginx**: Use Gunicorn as the WSGI server and Nginx as the reverse proxy.
-
----
